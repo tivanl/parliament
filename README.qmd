@@ -1,0 +1,14 @@
+---
+title: "Parliament of South Africa Data"
+author: "tivanl"
+format: html
+---
+
+## Introduction
+
+The purpose of this document is to explain the steps taken to obtain and analyse data from the [Parliamentary Monitoring Group](https://pmg.org.za/) and the [People's Assembly](https://www.pa.org.za/). 
+
+The objective is to use the data obtained from different pages of the website to create a more accessible format in which citizens can engage with the information. 
+
+## Scraping data for MPs
+
