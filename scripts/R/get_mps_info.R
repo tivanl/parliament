@@ -1,5 +1,8 @@
 # From the mp page, get their specific info
 
+# use this as an example
+# mp_page <- "https://www.pa.org.za/person/noxolo-abraham-ntantiso/"
+
 get_mps_info <- function(mp_page){
   
   log_info(glue("Getting info for page: {mp_page}"))
@@ -24,7 +27,8 @@ get_mps_info <- function(mp_page){
   
   mp_specific_page <- mp_specific_page$result
 
-    
+  ## Get the positions of the MP
+  
   current_pos_list <- mp_specific_page %>% 
     html_elements("#truncate-current-section") %>% 
     html_elements(".text-link") %>%
@@ -39,6 +43,16 @@ get_mps_info <- function(mp_page){
     map_dfr(
       ~get_mp_pos(.x, "current")
     )
+  
+  ## Yearly list of interests for the MP
+  yearly_interest_list <- mp_specific_page %>% 
+    html_elements(".person-interests") %>% 
+    html_elements(".mp-year-collapse") 
+  
+  # get the values for each year
+  # see function get_mp_interests()
+  
+  
   
   df_out <- bind_rows(current_pos_list, former_pos_list)
   

@@ -12,3 +12,5 @@ The objective is to use the data obtained from different pages of the website to
 
 ## Scraping data for MPs
 
+The [main page](https://pmg.org.za/members/) for getting MP information contains the names, party, and link to a page dedicated toward each MP. Gathering all the information from this page allows traversing the links to each MP's page to get more specific information regarding the committees that the member is or has been a part of, the interests that they have declared and which constitutency office they are affiliated with. 
+
