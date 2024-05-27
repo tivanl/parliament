@@ -1,0 +1,27 @@
+{
+    "id": "B4C30766",
+    "path": "~/projects/parliament/scripts/complete_mp_info.R",
+    "project_path": "scripts/complete_mp_info.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1716647582056.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "10,49",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1716711587,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1716711587568,
+    "read_only": false,
+    "read_only_alternatives": []
+}
