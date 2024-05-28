@@ -1,10 +1,13 @@
 library(rvest)
 library(glue)
+library(janitor)
 library(logger)
 library(tidyverse)
 source("scripts/R/get_mp_attributes.R")
 source("scripts/R/get_mp_pos.R")
-source("scripts/R/get_mps_info.R")
+source("scripts/R/get_mp_page_info.R")
+source("scripts/R/get_mp_interests.R")
+source("scripts/R/get_year_interest.R")
 source("scripts/R/get_start_end_date.R")
 
 # this is the page that contains all MPs (NA and NCOP)
@@ -26,11 +29,22 @@ mp_ncop <- mp_page %>%
 # get info from each MP's page
 parliament_mp_data <- bind_rows(mp_national_assembly, mp_ncop) %>% 
   mutate(
-    data = map(mp_page, get_mps_info)
+    data = map(mp_page, get_mp_page_info)
+  ) %>% 
+  unnest(data) %>% 
+  mutate(
+    data_set = map_chr(data, ~ifelse(ncol(.x) == 4, "interest", "position"))
   )
 
-# get columns into clean format
-full_parliament_mp <- parliament_mp_data %>% 
+
+
+# get into the correct format
+mp_interest_data <- parliament_mp_data %>% 
+  filter(data_set == "interest") %>% 
+  unnest(data)
+
+mp_position_data <- parliament_mp_data %>% 
+  filter(data_set == "position") %>% 
   unnest(data) %>% 
   mutate(
     title = gsub("(^[^,]+, )([A-Za-z]+)(.*)", "\\2", mp),
@@ -46,7 +60,8 @@ full_parliament_mp <- parliament_mp_data %>%
   )
 
 # save the data
-write_csv(full_parliament_mp, glue("output/members_of_parliament{Sys.Date()}.csv"))
+write_csv(mp_interest_data, glue("output/mp_interest_data_{Sys.Date()}.csv"))
+write_csv(mp_position_data, glue("output/mp_position_data_{Sys.Date()}.csv"))
 
 
 
